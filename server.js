@@ -14,7 +14,7 @@ const http = require('http');
 // Configuration
 // ===========================
 
-const PORT = 8080;
+const PORT = process.env.PORT || 8080; // Use environment PORT or default to 8080
 const HEARTBEAT_INTERVAL = 30000; // 30 seconds
 
 // ===========================

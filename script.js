@@ -7,7 +7,7 @@
 // Configuration
 // ===========================
 
-const WS_SERVER_URL = 'ws://localhost:8080';
+const WS_SERVER_URL = CONFIG.WS_SERVER_URL;
 const RECONNECT_INTERVAL = 3000; // 3 seconds
 const MAX_RECONNECT_ATTEMPTS = 5;
 

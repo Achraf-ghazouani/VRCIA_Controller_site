@@ -182,6 +182,13 @@ VRCIA_Controller_site/
 4. See the message appear in all other tabs
 5. Connect Unity app - it will receive all color broadcasts
 
+## 🌐 Deploying to Production
+
+See [DEPLOYMENT.md](DEPLOYMENT.md) for complete deployment instructions:
+- Deploy WebSocket server to Railway, Render, or Heroku
+- Deploy website to Vercel
+- Configure WebSocket URL for production
+
 ---
 
 **Ready to go!** 🎉

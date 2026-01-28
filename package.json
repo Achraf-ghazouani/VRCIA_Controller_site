@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "WebSocket server for color controller - broadcasts messages between web and Unity clients",
   "main": "server.js",
+  "engines": {
+    "node": ">=14.0.0"
+  },
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js"
