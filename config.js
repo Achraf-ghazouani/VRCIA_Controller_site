@@ -4,17 +4,10 @@
  */
 
 const CONFIG = {
-    // Local development
-    // WS_SERVER_URL: 'ws://localhost:8080',
-    
-    // Production - Replace with your deployed WebSocket server URL
-    // Examples:
-    // Railway: 'wss://your-app.railway.app'
-    // Render: 'wss://your-app.onrender.com'
-    // Heroku: 'wss://your-app.herokuapp.com'
-    // ngrok (for testing): 'wss://your-id.ngrok.io'
+    // Automatically use local WebSocket for local development,
+    // or Render WebSocket for production
     
     WS_SERVER_URL: window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
         ? 'ws://localhost:8080'  // Local development
-        : 'wss://your-websocket-server.railway.app'  // Production - CHANGE THIS!
+        : 'wss://vrcia-controller-site.onrender.com'  // Production Render WebSocket
 };
