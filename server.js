@@ -108,16 +108,7 @@ wss.on('connection', (ws, req) => {
     console.log(`  Total connections: ${wss.clients.size}`);
     console.log('═══════════════════════════════════════');
     
-    // Send welcome message to new client
-    sendToClient(ws, JSON.stringify({
-        type: 'welcome',
-        message: 'Connected to WebSocket server',
-        clientId: clientId,
-        timestamp: new Date().toISOString()
-    }));
-    
-    // Notify all other clients about new connection
-    broadcastSystemMessage(`Client ${clientId} joined`, ws);
+    // Don't send welcome message - Unity expects only hex codes, not JSON
     
     // ===========================
     // Handle incoming messages
@@ -156,25 +147,16 @@ wss.on('connection', (ws, req) => {
                 parsedData = message;
             }
             
-            // Broadcast message to all connected clients
-            const broadcastData = {
-                type: 'color',
-                color: isJson ? (parsedData.color || parsedData.message || message) : message,
-                from: clientId,
-                timestamp: new Date().toISOString()
-            };
+            // Extract the hex code to broadcast
+            const hexCode = isJson ? (parsedData.color || parsedData.message || message) : message;
             
-            broadcast(JSON.stringify(broadcastData), ws);
+            // Broadcast only the hex code (Unity expects plain strings, not JSON)
+            broadcast(hexCode, ws);
             
-            console.log(`  ✓ Broadcast to ${wss.clients.size - 1} other client(s)`);
+            console.log(`  ✓ Broadcast "${hexCode}" to ${wss.clients.size - 1} other client(s)`);
             console.log('─────────────────────────────────────');
             
-            // Send acknowledgment back to sender
-            sendToClient(ws, JSON.stringify({
-                type: 'ack',
-                message: 'Message received and broadcast',
-                original: message
-            }));
+            // Don't send acknowledgment - Unity expects only hex codes
             
         } catch (error) {
             console.error(`Error processing message from ${clientId}:`, error.message);

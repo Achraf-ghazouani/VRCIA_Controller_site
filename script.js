@@ -235,18 +235,19 @@ function enableButtons(enabled) {
  */
 function handleColorButtonClick(event) {
     const button = event.currentTarget;
-    const color = button.getAttribute('data-color');
+    const colorHex = button.getAttribute('data-color');
+    const colorName = button.getAttribute('data-name') || colorHex;
     
-    if (!color) {
+    if (!colorHex) {
         console.error('No color data attribute found');
         return;
     }
     
-    // Send color through WebSocket
-    const success = sendData(color);
+    // Send hex code through WebSocket
+    const success = sendData(colorHex);
     
     if (success) {
-        displayMessage(`Sent: "${color}"`, 'success');
+        displayMessage(`Sent: ${colorName} (${colorHex})`, 'success');
         
         // Visual feedback - brief highlight
         button.style.opacity = '0.7';
@@ -282,20 +283,26 @@ function handleKeyPress(event) {
     const key = event.key.toLowerCase();
     let colorButton = null;
     
-    // Map keys to colors
-    switch (key) {
-        case 'r':
-            colorButton = document.querySelector('[data-color="red"]');
-            break;
-        case 'b':
-            colorButton = document.querySelector('[data-color="blue"]');
-            break;
-        case 'g':
-            colorButton = document.querySelector('[data-color="green"]');
-            break;
-        case 'y':
-            colorButton = document.querySelector('[data-color="yellow"]');
-            break;
+    // Map number keys to colors (1-9, 0 for 10th color)
+    const keyMap = {
+        '1': '#00FF00',  // Vert
+        '2': '#FFFF00',  // Jaune
+        '3': '#0080FF',  // Cyan-Bleu
+        '4': '#FFFFFF',  // Blanc
+        '5': '#808080',  // Gris
+        '6': '#000000',  // Noir
+        '7': '#FF00FF',  // Magenta
+        '8': '#8000FF',  // Violet
+        '9': '#FF0000',  // Rouge
+        '0': '#00FF80',  // Vert-Cyan
+        'q': '#FF0080',  // Rose
+        'w': '#80FF00',  // Jaune-Vert
+        'e': '#0000FF',  // Bleu
+        'r': '#00FFFF',  // Cyan
+    };
+    
+    if (keyMap[key]) {
+        colorButton = document.querySelector(`[data-color="${keyMap[key]}"]`);
     }
     
     // Trigger button click if found and enabled
