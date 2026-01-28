@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="WebSocket Color Controller">
+    <title>Color Controller</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Main container for centered content -->
+    <div class="container">
+        <!-- Header section with title and connection status -->
+        <header class="header">
+            <h1>Color Controller</h1>
+            <div class="status-container">
+                <span class="status-label">Status:</span>
+                <span id="connectionStatus" class="status disconnected">Disconnected</span>
+            </div>
+        </header>
+
+        <!-- Main content area with color buttons -->
+        <main class="main-content">
+            <div class="button-grid">
+                <!-- Color control buttons -->
+                <button class="color-btn red-btn" data-color="red" aria-label="Send Red Color">
+                    Red
+                </button>
+                <button class="color-btn blue-btn" data-color="blue" aria-label="Send Blue Color">
+                    Blue
+                </button>
+                <button class="color-btn green-btn" data-color="green" aria-label="Send Green Color">
+                    Green
+                </button>
+                <button class="color-btn yellow-btn" data-color="yellow" aria-label="Send Yellow Color">
+                    Yellow
+                </button>
+            </div>
+
+            <!-- Message display area for user feedback -->
+            <div id="messageDisplay" class="message-display"></div>
+        </main>
+
+        <!-- Footer with additional information -->
+        <footer class="footer">
+            <p>WebSocket Server: <code>ws://localhost:8080</code></p>
+        </footer>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
